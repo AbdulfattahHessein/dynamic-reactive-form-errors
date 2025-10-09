@@ -1,0 +1,5 @@
+@for (error of errors | keyvalue; track error.key ) {
+<div class="error-message">
+  {{ error.key | translate : error.value }}
+</div>
+}

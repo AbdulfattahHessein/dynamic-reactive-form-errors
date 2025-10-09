@@ -1,1 +1,34 @@
 /* You can add global styles to this file, and also import other style files */
+/* Add application styles & imports to this file! */
+
+.ng-invalid:not(form) {
+  &.ng-touched,
+  &.ng-dirty {
+    border: 2px solid red;
+  }
+}
+
+.ng-valid:not(form) {
+  &.ng-touched,
+  &.ng-dirty {
+    border: 2px solid green;
+  }
+}
+
+.error-message {
+  animation: slideDown 0.5s ease forwards;
+}
+
+@keyframes slideDown {
+  0% {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+  60% {
+    transform: translateY(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}

@@ -1,0 +1,42 @@
+<app-language-switcher />
+<p>{{ form.value | json }}</p>
+
+<br />
+<form #f="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
+  Email:
+  <input [formControl]="form.controls.email" />
+  <small>Try to type test to see form errors at the bottom</small>
+  <br />
+
+  <fieldset [container]="containerDir.container" formGroupName="address">
+    <legend>Address</legend>
+
+    <ng-container
+      validatorMessageContainer
+      #containerDir="validatorMessageContainer"
+    ></ng-container>
+    Street:
+    <input [formControl]="form.controls.address.controls.street" />
+    City:
+    <input [formControl]="form.controls.address.controls.city" />
+  </fieldset>
+
+  <fieldset>
+    <legend>Skills</legend>
+    <button type="button" (click)="addSkill()">Add</button>
+    @for ( skill of form.controls.skills.controls; let i = $index; track $index)
+    {
+    <br />
+    Name:
+    <input [formControl]="skill.controls.name" />
+    Level:
+    <input [formControl]="skill.controls.level" />
+    <button type="button" (click)="removeSkill(i)">Remove</button>
+    }
+    <br />
+  </fieldset>
+  <button type="submit">Submit</button>
+  <button type="button" (click)="resetForm()">Reset</button>
+</form>
+
+<app-input-error [errors]="form.errors" />
