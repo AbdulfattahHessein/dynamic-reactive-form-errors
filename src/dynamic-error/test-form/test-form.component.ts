@@ -8,10 +8,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { DynamicValidatorMessage } from '../dynamic-validator-message.directive';
-import { InputErrorComponent } from '../input-error/input-error.component';
+import { InputErrorComponent } from '../core/input-error/input-error.component';
 import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
-import { ValidatorMessageContainer } from '../validator-message-container.directive';
+import { ValidatorMessageContainer } from '../core/validator-message-container.directive';
+import { DynamicValidatorMessage } from '../core/dynamic-validator-message.directive';
 
 @Component({
   selector: 'app-test-form',
