@@ -1,16 +1,6 @@
 {
     "dynamicReactiveFormErrors": {
-        "hello": "مرحبا",
-        "name": "اسم",
-        "address": "عنوان",
-        "street": "شارع",
-        "city": "مدينة",
-        "skills": "مهارات",
-        "nameRequired": "الاسم مطلوب",
-        "streetRequired": "الشارع مطلوب",
-        "cityRequired": "المدينة مطلوبة",
         "invalidAddress": "المدينة والشارع يجب أن يكونان مختلفان",
-        "nameForbidden": "الاسم ممنوع",
         "required": "هذا الحقل مطلوب",
         "minlength": "لقد أدخلت {actual}, ولكن الحد الأدنى هو {min}",
         "email": "الرجاء إدخال عنوان بريد إلكتروني صالح",

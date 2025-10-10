@@ -8,10 +8,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
 import { DynamicValidatorMessage } from '../../dynamic-error/core/dynamic-validator-message.directive';
 import { InputErrorComponent } from '../../dynamic-error/core/input-error/input-error.component';
 import { ValidatorMessageContainer } from '../../dynamic-error/core/validator-message-container.directive';
+import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
 
 @Component({
   selector: 'app-test-form',
@@ -38,7 +38,7 @@ export class TestFormComponent {
       ]),
       address: new FormGroup(
         {
-          street: new FormControl('', Validators.required),
+          street: new FormControl('', Validators.required), //{required: true}
           city: new FormControl('', Validators.required),
         },
         function (c) {
