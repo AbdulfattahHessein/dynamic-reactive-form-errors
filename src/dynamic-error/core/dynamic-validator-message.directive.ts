@@ -7,15 +7,15 @@ import {
   OnInit,
   ViewContainerRef,
 } from '@angular/core';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import {
   ControlContainer,
   FormGroupDirective,
   NgControl,
   TouchedChangeEvent,
 } from '@angular/forms';
-import { debounceTime, distinctUntilChanged, EMPTY, filter, merge } from 'rxjs';
+import { debounceTime, EMPTY, filter, merge } from 'rxjs';
 import { ErrorStateMatcher } from './error-state-matcher.service';
-import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { InputErrorComponent } from './input-error/input-error.component';
 
 @Directive({
@@ -67,12 +67,9 @@ export class DynamicValidatorMessage implements OnInit {
       )
     );
 
-    const valueChangeEvent = this.control.valueChanges.pipe(
-      debounceTime(500),
-      distinctUntilChanged((a, b) => JSON.stringify(a) === JSON.stringify(b))
-    );
+    const statusChanges = this.control.statusChanges.pipe(debounceTime(500));
 
-    merge(valueChangeEvent, touchEvent, submitEvent)
+    merge(statusChanges, touchEvent, submitEvent)
       .pipe(takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         if (this.isErrorVisible) {
