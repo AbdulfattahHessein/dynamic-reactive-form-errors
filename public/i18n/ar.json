@@ -2,7 +2,7 @@
     "dynamicReactiveFormErrors": {
         "invalidAddress": "المدينة والشارع يجب أن يكونان مختلفان",
         "required": "هذا الحقل مطلوب",
-        "minlength": "لقد أدخلت {actual}, ولكن الحد الأدنى هو {min}",
+        "minlength": "لقد أدخلت {{actualLength}}, ولكن الحد الأدنى هو {{requiredLength}}",
         "email": "الرجاء إدخال عنوان بريد إلكتروني صالح",
         "forbiddenName": "اسم غير مسموح به",
         "maxlength": "الطول يجب أن يكون اقل من {{requiredLength}} حروف، وقد دخل {{actualLength}} حروف"

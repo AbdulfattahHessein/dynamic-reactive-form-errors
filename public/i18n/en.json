@@ -2,7 +2,7 @@
     "dynamicReactiveFormErrors": {
         "invalidAddress": "City and Street must be different",
         "required": "This field is required",
-        "minlength": "The length should be at least {{min}} characters, currently it is {{actual}}",
+        "minlength": "The length should be at least {{requiredLength}} characters, currently it is {{actualLength}}",
         "email": "Email address is invalid",
         "forbiddenName": "Name is forbidden",
         "maxlength": "The length should be at most {{requiredLength}} characters, currently it is {{actualLength}}"
