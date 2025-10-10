@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-language-switcher',
@@ -22,6 +22,7 @@ export class LanguageSwitcherComponent {
     const storedLang = localStorage.getItem('language');
 
     if (storedLang) {
+      this.currentLanguage = storedLang;
       this.translate.use(storedLang);
     } else {
       const browserLang = this.translate.getBrowserLang();
