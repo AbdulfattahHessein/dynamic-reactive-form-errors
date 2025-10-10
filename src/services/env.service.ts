@@ -11,7 +11,7 @@ export interface Env {
 @Injectable({
   providedIn: 'root',
 })
-export class ConfigService {
+export class envService {
   private _env!: Env;
 
   get env() {
@@ -23,6 +23,6 @@ export class ConfigService {
   loadEnv() {
     return this.http
       .get<Env>('configs/env.json')
-      .pipe(tap((config) => (this._env = config)));
+      .pipe(tap((env) => (this._env = env)));
   }
 }

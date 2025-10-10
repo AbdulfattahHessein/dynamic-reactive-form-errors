@@ -10,7 +10,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { forkJoin } from 'rxjs';
-import { ConfigService as envService } from '../services/env.service';
+import { envService } from '../services/env.service';
 import { LangsService } from '../services/langs.service';
 import { routes } from './app.routes';
 

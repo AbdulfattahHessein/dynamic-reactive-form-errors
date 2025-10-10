@@ -35,10 +35,8 @@
     }
     <br />
   </fieldset>
-  <button type="submit" [disabled]="form.pristine">Submit</button>
-  <button type="button" (click)="resetForm()" [disabled]="form.pristine">
-    Reset
-  </button>
+  <button type="submit">Submit</button>
+  <button type="button" (click)="resetForm()">Reset</button>
 </form>
 
 <app-input-error [errors]="form.errors" />
