@@ -101,7 +101,7 @@ export const appConfig: ApplicationConfig = {
 
 ## 🌍 Internationalization (i18n)
 
-Create JSON translation files in the path you configured above (e.g., `src/assets/i18n/`). The error messages must be nested under the `dynamicReactiveFormErrors` key.
+Create JSON translation files in the path you configured above (e.g., `public/i18n/`). The error messages must be nested under the `dynamicReactiveFormErrors` key.
 
 **`en.json`**
 
