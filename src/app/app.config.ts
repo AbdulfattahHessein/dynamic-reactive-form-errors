@@ -9,7 +9,7 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { switchMap } from 'rxjs';
+import { forkJoin } from 'rxjs';
 import { ConfigService as envService } from '../services/env.service';
 import { LangsService } from '../services/langs.service';
 import { routes } from './app.routes';
@@ -35,9 +35,5 @@ function initializeApp() {
 
   const langService = inject(LangsService);
 
-  return configService.loadEnv().pipe(
-    switchMap(() => {
-      return langService.loadLangs();
-    })
-  );
+  return forkJoin([configService.loadEnv(), langService.loadLangs()]);
 }

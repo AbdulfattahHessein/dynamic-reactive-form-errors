@@ -74,7 +74,7 @@ export class LangsService {
       this._currentLanguage = this.browserLang;
     }
 
-    this.switchLanguage();
+    this.translate.use(this._currentLanguage);
   }
 
   switchLanguage(): void {
