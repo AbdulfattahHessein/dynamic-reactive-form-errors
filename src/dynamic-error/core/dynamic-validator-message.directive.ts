@@ -27,7 +27,6 @@ import { InputErrorComponent } from './input-error/input-error.component';
     [formGroupName]:not([withoutValidationErrors]),
     [formArrayName]:not([withoutValidationErrors])
   `,
-  standalone: true,
 })
 export class DynamicValidatorMessage implements OnInit {
   ngControl =

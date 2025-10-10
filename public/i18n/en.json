@@ -1,18 +1,20 @@
 {
-    "hello": "Hello",
-    "name": "Name",
-    "address": "Address",
-    "street": "Street",
-    "city": "City",
-    "skills": "Skills",
-    "nameRequired": "Name is required",
-    "streetRequired": "Street is required",
-    "cityRequired": "City is required",
-    "invalidAddress": "City and Street must be different",
-    "nameForbidden": "Name is forbidden",
-    "required": "This field is required",
-    "minlength": "The length should be at least {{min}} characters, currently it is {{actual}}",
-    "email": "Email address is invalid",
-    "forbiddenName": "Name is forbidden",
-    "maxlength": "The length should be at most {{requiredLength}} characters, currently it is {{actualLength}}"
+    "dynamicReactiveFormErrors": {
+        "hello": "Hello",
+        "name": "Name",
+        "address": "Address",
+        "street": "Street",
+        "city": "City",
+        "skills": "Skills",
+        "nameRequired": "Name is required",
+        "streetRequired": "Street is required",
+        "cityRequired": "City is required",
+        "invalidAddress": "City and Street must be different",
+        "nameForbidden": "Name is forbidden",
+        "required": "This field is required",
+        "minlength": "The length should be at least {{min}} characters, currently it is {{actual}}",
+        "email": "Email address is invalid",
+        "forbiddenName": "Name is forbidden",
+        "maxlength": "The length should be at most {{requiredLength}} characters, currently it is {{actualLength}}"
+    }
 }

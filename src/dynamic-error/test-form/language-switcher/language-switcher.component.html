@@ -3,11 +3,12 @@
   [(ngModel)]="currentLanguage"
   (change)="switchLanguage()"
 >
+  @for (language of languages; track language.code) {
   <option
-    *ngFor="let language of languages"
     [ngValue]="language.code"
     [selected]="language.code === currentLanguage"
   >
     {{ language.name }}
   </option>
+  }
 </select>

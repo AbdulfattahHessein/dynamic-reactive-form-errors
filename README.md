@@ -1,59 +1,175 @@
-# DynamicReactiveFormErrors
+# Dynamic Reactive Form Errors
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.15.
+A modern Angular library for handling dynamic form validation with real-time error messages and i18n support.
 
-## Development server
+## Features
 
-To start a local development server, run:
+- Error messages appear and disappear dynamically
+- Customizable error message styling
+- Custom error state matcher
+- Change where error messages appear 
+- Internationalization (i18n) support
+- Nested form groups and arrays support
 
+## For Test Project Demo
 ```bash
-ng serve
+# Install dependencies
+npm install
+
+# Start development server
+npm start
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+## How can use it in your project
 
-## Code scaffolding
+- Install dependencies
+  - npm i --save  @ngx-translate/core @ngx-translate/http-loader 
+  - configure ngx-translate provider
+    - ```typescript
+        provideHttpClient(),
+        provideTranslateService({
+            lang: 'en',
+            fallbackLang: 'ar',
+            loader: provideTranslateHttpLoader({
+                prefix: './i18n/',
+                suffix: '.json',
+            }),
+        }),
+        ```
+    - See json examples [i18n Support](#i18n Support)
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+- Copy dynamic-error folder to your project
+- Remove test form folder, it is for test only 
 
-```bash
-ng generate component component-name
+
+## Project Structure
+
+public/
+│   └── i18n/
+│       ├── en.json
+│       └── ar.json
+src/
+├── dynamic-error/
+│  └── core/
+│       ├── input-error/
+│       └── ...
+
+## Quick Start
+
+1. Import DynamicValidatorMessage with ReactiveFormsModule:
+
+```typescript
+
+@Component({
+  ...,
+  
+  imports: [
+    DynamicValidatorMessage,
+    ReactiveFormsModule
+  ]
+})
+export class YourComponent {
+    // this is the component that has the reactive form
+ }
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+- YourComponent.html:
 
-```bash
-ng generate --help
+```html
+<form [formGroup]="form">
+  <input formControlName="email">
+</form>
 ```
 
-## Building
+## Core Components
 
-To build the project run:
+### DynamicValidatorMessage
 
-```bash
-ng build
+The main directive for handling validation errors:
+
+```typescript
+@Directive({
+  selector: `
+    [formControl]:not([withoutValidationErrors]),
+    [formControlName]:not([withoutValidationErrors]),
+    [formGroup]:not([withoutValidationErrors]):not(form),
+    [formGroupName]:not([withoutValidationErrors]),
+    [formArrayName]:not([withoutValidationErrors])
+  `,
+  standalone: true,
+})
+export class DynamicValidatorMessage {}
+```
+This directive applied automatically for any form element use formControl, formControlName, formGroup, formGroupName,
+formArrayName
+
+Notes: 
+    - form element that use formGroup not applied to it
+    - if you want to disable the dynamic validation put withoutValidationErrors at the form element
+    - ```html
+        <input withoutValidationErrors />
+      ```
+
+
+### ErrorStateMatcher
+
+Controls when errors are displayed:
+
+```typescript
+export class CustomErrorStateMatcher implements ErrorStateMatcher {
+    isErrorVisible(
+    control: AbstractControl,
+    form: FormGroupDirective | NgForm | null
+  ) {
+    return Boolean(
+        control.invalid &&
+        (control.touched ||
+          control.dirty ||
+          (form && form.touched && form.submitted))
+    );
+  }
+}
+...
+
+@Component({
+    ...,
+    providers: [
+        {
+            provide: ErrorStateMatcher, 
+            useClass: CustomErrorStateMatcher
+        }
+    ]
+})
 ```
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+## Change where error messages appear
 
-## Running unit tests
+1. Import ValidationMessageContainer directive
+2. ```html
+    <form [formGroup]="form">
+        <input 
+        [container]="containerDir.container" formControlName="email"
+        />
+    </form>
+    
+    <ng-container
+      validatorMessageContainer
+      #containerDir="validatorMessageContainer"
+    />
+   ```
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+## i18n Support
+Supports multiple languages with automatic message translation:
 
-```bash
-ng test
+```json
+{
+  "dynamicReactiveFormErrors": {
+    "required": "This field is required",
+    "email": "Please enter a valid email"
+  }
+}
 ```
+## License
 
-## Running end-to-end tests
+MIT License - see the [LICENSE](LICENSE) file for details.
 
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

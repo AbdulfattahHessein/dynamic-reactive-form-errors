@@ -17,8 +17,7 @@ export class ErrorStateMatcher implements ErrorStateMatcher {
     form: FormGroupDirective | NgForm | null
   ) {
     return Boolean(
-      control &&
-        control.invalid &&
+      control.invalid &&
         (control.touched ||
           control.dirty ||
           (form && form.touched && form.submitted))
