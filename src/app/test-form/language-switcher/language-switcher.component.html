@@ -1,9 +1,6 @@
 <select title="Select Language" [(ngModel)]="langService.currentLanguage">
   @for (language of langService.langs.supported; track language.code) {
-  <option
-    [ngValue]="language.code"
-    [selected]="language.code === langService.currentLanguage"
-  >
+  <option [ngValue]="language.code">
     {{ language.name }}
   </option>
   }

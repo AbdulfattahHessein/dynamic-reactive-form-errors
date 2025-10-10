@@ -31,11 +31,14 @@ export class TestFormComponent {
 
   form = new FormGroup(
     {
-      email: new FormControl<string>('', [
-        Validators.required,
-        Validators.maxLength(5),
-        Validators.email,
-      ]),
+      email: new FormControl<string>('taha', {
+        nonNullable: true,
+        validators: [
+          Validators.required,
+          Validators.maxLength(5),
+          Validators.email,
+        ],
+      }),
       address: new FormGroup(
         {
           street: new FormControl('', Validators.required), //{required: true}
