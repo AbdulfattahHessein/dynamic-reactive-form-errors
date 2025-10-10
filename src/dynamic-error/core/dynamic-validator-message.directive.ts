@@ -14,7 +14,7 @@ import {
   NgControl,
   TouchedChangeEvent,
 } from '@angular/forms';
-import { debounceTime, EMPTY, filter, merge } from 'rxjs';
+import { delay, EMPTY, filter, merge } from 'rxjs';
 import { ErrorStateMatcher } from './error-state-matcher.service';
 import { InputErrorComponent } from './input-error/input-error.component';
 
@@ -59,15 +59,27 @@ export class DynamicValidatorMessage implements OnInit {
   destroyRef = inject(DestroyRef);
 
   ngOnInit() {
-    const submitEvent = this.form?.ngSubmit.asObservable() ?? EMPTY;
+    const submitEvent =
+      this.form?.ngSubmit
+        .asObservable()
+        .pipe
+        // tap(console.log)
+        () ?? EMPTY;
 
     const touchEvent = this.control.events.pipe(
       filter(
-        (event) => event instanceof TouchedChangeEvent && this.control.pristine
+        (event) =>
+          event instanceof TouchedChangeEvent &&
+          event.touched &&
+          this.control.pristine
       )
+      // tap(console.log)
     );
 
-    const statusChanges = this.control.statusChanges.pipe(debounceTime(500));
+    const statusChanges = this.control.statusChanges.pipe(
+      delay(0) /*To run after touchedChange when form is submitted or reset*/
+      // tap(console.log),
+    );
 
     merge(statusChanges, touchEvent, submitEvent)
       .pipe(takeUntilDestroyed(this.destroyRef))

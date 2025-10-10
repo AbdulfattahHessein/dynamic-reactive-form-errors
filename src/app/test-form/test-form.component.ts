@@ -79,7 +79,7 @@ export class TestFormComponent {
     if (this.form.valid) {
       console.log(this.form.value);
 
-      this.form.reset();
+      // this.form.reset();
 
       // this.f.resetForm(); // reset the form submitted flag
     }
