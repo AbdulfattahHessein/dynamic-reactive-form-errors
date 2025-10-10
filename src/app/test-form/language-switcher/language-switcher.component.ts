@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { LangService } from '../../../services/lang.service';
+import { LangsService } from '../../../services/langs.service';
 
 @Component({
   selector: 'app-language-switcher',
@@ -9,5 +9,5 @@ import { LangService } from '../../../services/lang.service';
   imports: [FormsModule],
 })
 export class LanguageSwitcherComponent {
-  langService = inject(LangService);
+  langService = inject(LangsService);
 }

@@ -1,0 +1,17 @@
+{
+    "default": "en",
+    "fallback": "ar",
+    "supported": [
+        {
+            "code": "en",
+            "name": "English",
+            "flag": "US"
+        },
+        {
+            "code": "ar",
+            "name": "Arabic",
+            "flag": "EG"
+        }
+    ],
+    "localeStorageKey": "language"
+}

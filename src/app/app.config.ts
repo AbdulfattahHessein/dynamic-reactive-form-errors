@@ -9,9 +9,9 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
-import { tap } from 'rxjs';
-import { ConfigService } from '../services/env.service';
-import { LangService } from '../services/lang.service';
+import { switchMap } from 'rxjs';
+import { ConfigService as envService } from '../services/env.service';
+import { LangsService } from '../services/langs.service';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -31,13 +31,13 @@ export const appConfig: ApplicationConfig = {
 };
 
 function initializeApp() {
-  const configService = inject(ConfigService);
+  const configService = inject(envService);
 
-  const langService = inject(LangService);
+  const langService = inject(LangsService);
 
-  return configService.getConfig().pipe(
-    tap(() => {
-      langService.initLang();
+  return configService.loadEnv().pipe(
+    switchMap(() => {
+      return langService.loadLangs();
     })
   );
 }

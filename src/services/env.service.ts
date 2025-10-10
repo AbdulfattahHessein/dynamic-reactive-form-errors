@@ -8,39 +8,21 @@ export interface Env {
   featureFlag: boolean;
 }
 
-export interface Langs {
-  default: string;
-  fallback: string;
-  supported: Supported[];
-  localeStorageKey: string;
-}
-
-export interface Supported {
-  code: string;
-  name: string;
-  flag: string;
-}
-
-export interface Config {
-  env: Env;
-  langs: Langs;
-}
-
 @Injectable({
   providedIn: 'root',
 })
 export class ConfigService {
-  private _config!: Config;
+  private _env!: Env;
 
-  get config() {
-    return this._config;
+  get env() {
+    return this._env;
   }
 
   http = inject(HttpClient);
 
-  getConfig() {
+  loadEnv() {
     return this.http
-      .get<Config>('configs/config.json')
-      .pipe(tap((config) => (this._config = config)));
+      .get<Env>('configs/env.json')
+      .pipe(tap((config) => (this._env = config)));
   }
 }
