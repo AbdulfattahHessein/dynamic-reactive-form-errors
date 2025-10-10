@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { tap } from 'rxjs';
+import { concatMap } from 'rxjs';
 
 export interface Langs {
   default: string;
@@ -54,9 +54,9 @@ export class LangsService {
 
   loadLangs() {
     return this.http.get<Langs>('configs/langs.json').pipe(
-      tap((langs) => {
+      concatMap((langs) => {
         this._langs = langs;
-        this.setupLangs();
+        return this.setupLangs();
       })
     );
   }
@@ -74,7 +74,7 @@ export class LangsService {
       this._currentLanguage = this.browserLang;
     }
 
-    this.translate.use(this._currentLanguage);
+    return this.translate.use(this._currentLanguage);
   }
 
   switchLanguage(): void {
