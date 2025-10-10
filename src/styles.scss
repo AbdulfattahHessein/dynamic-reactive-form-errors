@@ -1,17 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
 /* Add application styles & imports to this file! */
 
-.ng-invalid:not(form) {
-  &.ng-touched,
-  &.ng-dirty {
-    border: 2px solid red;
+:not(.not-validate) {
+  &.ng-invalid:not(form) {
+    &.ng-touched,
+    &.ng-dirty {
+      border: 2px solid red;
+    }
   }
-}
 
-.ng-valid:not(form) {
-  &.ng-touched,
-  &.ng-dirty {
-    border: 2px solid green;
+  &.ng-valid:not(form) {
+    &.ng-touched,
+    &.ng-dirty {
+      border: 2px solid green;
+    }
   }
 }
 

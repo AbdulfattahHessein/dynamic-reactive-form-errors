@@ -1,4 +1,8 @@
-<select title="Select Language" [(ngModel)]="langService.currentLanguage">
+<select
+  title="Select Language"
+  class="not-validate"
+  [(ngModel)]="langService.currentLanguage"
+>
   @for (language of langService.langs.supported; track language.code) {
   <option [ngValue]="language.code">
     {{ language.name }}
