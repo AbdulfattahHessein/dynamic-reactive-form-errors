@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, ViewChild } from '@angular/core';
+import { Component, inject, ViewChild } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -11,6 +11,7 @@ import {
 import { DynamicValidatorMessage } from '../../dynamic-error/core/dynamic-validator-message.directive';
 import { InputErrorComponent } from '../../dynamic-error/core/input-error/input-error.component';
 import { ValidatorMessageContainer } from '../../dynamic-error/core/validator-message-container.directive';
+import { ConfigService } from '../../services/env.service';
 import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
 
 @Component({
@@ -28,6 +29,12 @@ import { LanguageSwitcherComponent } from './language-switcher/language-switcher
 })
 export class TestFormComponent {
   @ViewChild('f') f!: NgForm;
+
+  envService = inject(ConfigService);
+
+  constructor() {
+    console.log(this.envService.config);
+  }
 
   form = new FormGroup(
     {
