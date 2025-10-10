@@ -1,5 +1,4 @@
 import { Component, inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { FormsModule } from '@angular/forms';
 

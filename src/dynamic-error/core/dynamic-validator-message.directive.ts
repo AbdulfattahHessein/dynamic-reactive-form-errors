@@ -4,7 +4,6 @@ import {
   Directive,
   inject,
   Input,
-  OnDestroy,
   OnInit,
   ViewContainerRef,
 } from '@angular/core';

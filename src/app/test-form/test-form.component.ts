@@ -1,5 +1,5 @@
 import { JsonPipe } from '@angular/common';
-import { Component, inject, ViewChild } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import {
   FormArray,
   FormControl,
@@ -8,10 +8,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { InputErrorComponent } from '../core/input-error/input-error.component';
 import { LanguageSwitcherComponent } from './language-switcher/language-switcher.component';
-import { ValidatorMessageContainer } from '../core/validator-message-container.directive';
-import { DynamicValidatorMessage } from '../core/dynamic-validator-message.directive';
+import { DynamicValidatorMessage } from '../../dynamic-error/core/dynamic-validator-message.directive';
+import { InputErrorComponent } from '../../dynamic-error/core/input-error/input-error.component';
+import { ValidatorMessageContainer } from '../../dynamic-error/core/validator-message-container.directive';
 
 @Component({
   selector: 'app-test-form',

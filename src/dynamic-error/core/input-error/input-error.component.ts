@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input } from '@angular/core';
-import { CommonModule, KeyValue } from '@angular/common';
+import { CommonModule } from '@angular/common';
 import { ValidationErrors } from '@angular/forms';
 import { TranslatePipe } from '@ngx-translate/core';
 
