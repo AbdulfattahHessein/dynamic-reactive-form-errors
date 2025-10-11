@@ -10,6 +10,9 @@
   <br />
 
   <!-- it is recommended to use formGroupName instead of [formGroup] -->
+  <!-- it is not required to specify formGroup on the parent container if you use [formControl] for the child controls
+       but it is required if you want dynamic validation on the element container
+  -->
   <fieldset [container]="containerDir.container" formGroupName="address">
     <legend>Address</legend>
 
