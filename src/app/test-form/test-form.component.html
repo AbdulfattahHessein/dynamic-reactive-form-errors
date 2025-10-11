@@ -2,12 +2,14 @@
 <p>{{ form.value | json }}</p>
 
 <br />
+<!-- it is recommended to use [formGroup] only for the root form -->
 <form #f="ngForm" [formGroup]="form" (ngSubmit)="onSubmit()">
   Email:
   <input [formControl]="form.controls.email" />
   <small>Try to type test to see form errors at the bottom</small>
   <br />
 
+  <!-- it is recommended to use formGroupName instead of [formGroup] -->
   <fieldset [container]="containerDir.container" formGroupName="address">
     <legend>Address</legend>
 
@@ -21,6 +23,7 @@
     <input [formControl]="form.controls.address.controls.city" />
   </fieldset>
 
+  <!-- formArrayName="skills" if you add it dynamic validation will work on the fieldset -->
   <fieldset>
     <legend>Skills</legend>
     <button type="button" (click)="addSkill()">Add</button>

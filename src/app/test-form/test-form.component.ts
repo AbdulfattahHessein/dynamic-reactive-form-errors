@@ -31,7 +31,7 @@ export class TestFormComponent {
 
   form = new FormGroup(
     {
-      email: new FormControl<string>('taha', {
+      email: new FormControl<string>('', {
         nonNullable: true,
         validators: [
           Validators.required,
