@@ -35,11 +35,13 @@ export class AuthService {
   }
 
   logout() {
-    this.http
+    return this.http
       .get(this.env.env.apiUrl + '/auth/logout', { withCredentials: true })
-      .subscribe(() => {
-        this.user = null;
-      });
+      .pipe(
+        tap(() => {
+          this.user = null;
+        })
+      );
   }
 
   loadUserInfo() {

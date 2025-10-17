@@ -1,16 +1,21 @@
 <ul>
-  <li>
-    <a routerLink="/auth/login" routerLinkActive="active">Login</a>
-  </li>
   @if (auth.isLoggedIn) {
   <li>
-    <a routerLink="/auth/login" (click)="auth.logout()">Logout</a>
+    <button routerLink="/auth/login" (click)="logout()">Logout</button>
+  </li>
+
+  } @else {
+  <li>
+    <button routerLink="/auth/login" routerLinkActive="active">Login</button>
+  </li>
+
+  <li>
+    <button routerLink="/auth/register" routerLinkActive="active">
+      Register
+    </button>
   </li>
   }
   <li>
-    <a routerLink="/" routerLinkActive="active">Home</a>
-  </li>
-  <li>
-    <a routerLink="/auth/register" routerLinkActive="active">Register</a>
+    <button routerLink="/" routerLinkActive="active">Home</button>
   </li>
 </ul>
