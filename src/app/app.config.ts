@@ -12,6 +12,7 @@ import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { concatMap, forkJoin } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { envService } from '../services/env.service';
+import { GlobalConfigService } from '../services/global-config.service';
 import { LangsService } from '../services/langs.service';
 import { routes } from './app.routes';
 
@@ -36,9 +37,16 @@ function initializeApp() {
 
   const langService = inject(LangsService);
 
+  const global = inject(GlobalConfigService);
+
   const auth = inject(AuthService);
 
-  return forkJoin([configService.loadEnv(), langService.loadLangs()]).pipe(
-    concatMap(() => auth.loadUserInfo())
-  );
+  return global
+    .loadGlobalConfig()
+    .pipe(
+      concatMap(() =>
+        forkJoin([configService.loadEnv(), langService.loadLangs()])
+      )
+    )
+    .pipe(concatMap(() => auth.loadUserInfo()));
 }
