@@ -1,0 +1,24 @@
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  justify-content: space-between;
+
+  li {
+    margin-right: 20px;
+  }
+
+  a {
+    text-decoration: none;
+    color: #333;
+
+    &.active {
+      color: #337ab7;
+    }
+  }
+}
+
+.btn {
+  cursor: pointer;
+}

@@ -1,0 +1,16 @@
+<ul>
+  <li>
+    <a routerLink="/auth/login" routerLinkActive="active">Login</a>
+  </li>
+  @if (auth.isLoggedIn) {
+  <li>
+    <a routerLink="/auth/login" (click)="auth.logout()">Logout</a>
+  </li>
+  }
+  <li>
+    <a routerLink="/" routerLinkActive="active">Home</a>
+  </li>
+  <li>
+    <a routerLink="/auth/register" routerLinkActive="active">Register</a>
+  </li>
+</ul>
