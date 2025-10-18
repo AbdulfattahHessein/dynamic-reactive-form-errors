@@ -14,13 +14,18 @@ export type User = {
   providedIn: 'root',
 })
 export class AuthService {
-  http = inject(HttpClient);
-  env = inject(envService);
-  get isLoggedIn() {
-    return !!this.user;
+  private http = inject(HttpClient);
+  private env = inject(envService);
+
+  private _user: User | null = null;
+
+  get user() {
+    return this._user;
   }
 
-  user: User | null = null;
+  get isLoggedIn() {
+    return !!this._user;
+  }
 
   login(user: { email: string; password: string }): Observable<any> {
     return this.http
@@ -39,7 +44,7 @@ export class AuthService {
       .get(this.env.env.apiUrl + '/auth/logout', { withCredentials: true })
       .pipe(
         tap(() => {
-          this.user = null;
+          this._user = null;
         })
       );
   }
@@ -49,7 +54,7 @@ export class AuthService {
       .get<{ data: User } | null>(this.env.env.apiUrl + '/auth/user-info', {
         withCredentials: true,
       })
-      .pipe(tap((res) => (this.user = res ? res.data : null)));
+      .pipe(tap((res) => (this._user = res ? res.data : null)));
   }
 }
 

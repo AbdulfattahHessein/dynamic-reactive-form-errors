@@ -19,3 +19,7 @@
     <button routerLink="/" routerLinkActive="active">Home</button>
   </li>
 </ul>
+
+@if (auth.user) {
+<h3>User info: {{ auth.user | json }}</h3>
+}
