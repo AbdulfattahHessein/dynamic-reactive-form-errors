@@ -1,6 +1,6 @@
 {
-    "default": "en",
-    "fallback": "ar",
+    "default": "ar",
+    "fallback": "en",
     "supported": [
         {
             "code": "en",
