@@ -10,7 +10,6 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideTranslateService } from '@ngx-translate/core';
 import { provideTranslateHttpLoader } from '@ngx-translate/http-loader';
 import { concatMap, forkJoin } from 'rxjs';
-import { AuthService } from '../services/auth.service';
 import { envService } from '../services/env.service';
 import { GlobalConfigService } from '../services/global-config.service';
 import { LangsService } from '../services/langs.service';
@@ -39,14 +38,11 @@ function initializeApp() {
 
   const global = inject(GlobalConfigService);
 
-  const auth = inject(AuthService);
-
   return global
     .loadGlobalConfig()
     .pipe(
       concatMap(() =>
-        forkJoin([configService.loadEnv(), langService.loadLangs()])
-      )
-    )
-    .pipe(concatMap(() => auth.loadUserInfo()));
+        forkJoin([configService.loadEnv(), langService.loadLangs()]),
+      ),
+    );
 }

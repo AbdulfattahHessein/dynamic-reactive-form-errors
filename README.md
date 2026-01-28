@@ -4,13 +4,13 @@ A lightweight, zero-configuration solution for handling reactive form validation
 
 ## ✨ Features
 
-* **Zero Boilerplate:** No need to write `*ngIf` statements or error message tags in your HTML.
-* **Dynamic & Real-Time:** Error messages appear and disappear instantly as the user types.
-* **i18n Ready:** Full internationalization support using `@ngx-translate`.
-* **Customizable Logic:** Use a custom `ErrorStateMatcher` to control exactly when errors are shown (e.g., on touch, dirty, or submit).
-* **Flexible Placement:** Easily change where error messages are rendered in your template.
-* **Comprehensive Support:** Works seamlessly with nested `FormGroup` and `FormArray` instances.
-* **Opt-Out Control:** Easily disable validation for specific controls when needed.
+- **Zero Boilerplate:** No need to write `*ngIf` statements or error message tags in your HTML.
+- **Dynamic & Real-Time:** Error messages appear and disappear instantly as the user types.
+- **i18n Ready:** Full internationalization support using `@ngx-translate`.
+- **Customizable Logic:** Use a custom `ErrorStateMatcher` to control exactly when errors are shown (e.g., on touch, dirty, or submit).
+- **Flexible Placement:** Easily change where error messages are rendered in your template.
+- **Comprehensive Support:** Works seamlessly with nested `FormGroup` and `FormArray` instances.
+- **Opt-Out Control:** Easily disable validation for specific controls when needed.
 
 ---
 
@@ -21,22 +21,22 @@ Getting started is simple. Once you've completed the setup, you only need to imp
 1.  **Import `DynamicValidatorMessage` and `ReactiveFormsModule`** into your component.
 
     ```typescript
-    import { Component } from '@angular/core';
-    import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-    import { DynamicValidatorMessage } from './dynamic-error/dynamic-validator-message.directive';
+    import { Component } from "@angular/core";
+    import { ReactiveFormsModule, FormBuilder, Validators } from "@angular/forms";
+    import { DynamicValidatorMessage } from "./dynamic-error/dynamic-validator-message.directive";
 
     @Component({
-      selector: 'app-your-component',
+      selector: "app-your-component",
       standalone: true,
       imports: [
         ReactiveFormsModule,
-        DynamicValidatorMessage // <-- Import the directive
+        DynamicValidatorMessage, // <-- Import the directive
       ],
-      templateUrl: './your-component.html',
+      templateUrl: "./your-component.html",
     })
     export class YourComponent {
       myForm = this.fb.group({
-        email: ['', [Validators.required, Validators.email]],
+        email: ["", [Validators.required, Validators.email]],
         // ... other controls
       });
 
@@ -49,7 +49,7 @@ Getting started is simple. Once you've completed the setup, you only need to imp
     ```html
     <form [formGroup]="myForm">
       <label for="email">Email</label>
-      <input id="email" formControlName="email">
+      <input id="email" formControlName="email" />
     </form>
     ```
 
@@ -67,7 +67,7 @@ This library relies on `@ngx-translate` for handling i18n.
 
 ```bash
 npm install @ngx-translate/core @ngx-translate/http-loader
-````
+```
 
 ### Step 3: Configure Providers
 
@@ -76,8 +76,8 @@ In your main application configuration (e.g., `app.config.ts` for standalone app
 ```typescript
 // src/app/app.config.ts
 
-import { ApplicationConfig, provideHttpClient } from '@angular/common/http';
-import { provideTranslateService, provideTranslateHttpLoader } from 'ngx-translate-provider';
+import { ApplicationConfig, provideHttpClient } from "@angular/common/http";
+import { provideTranslateService, provideTranslateHttpLoader } from "ngx-translate-provider";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -86,18 +86,18 @@ export const appConfig: ApplicationConfig = {
 
     // Configure ngx-translate
     provideTranslateService({
-      lang: 'en',
-      fallbackLang: 'ar',
+      lang: "en",
+      fallbackLang: "ar",
       loader: provideTranslateHttpLoader({
-        prefix: './i18n/', // <-- Path to your translation files
-        suffix: '.json',
+        prefix: "./i18n/", // <-- Path to your translation files
+        suffix: ".json",
       }),
     }),
   ],
 };
 ```
 
------
+---
 
 ## 🌍 Internationalization (i18n)
 
@@ -122,12 +122,14 @@ Create JSON translation files in the path you configured above (e.g., `public/i1
 {
   "dynamicReactiveFormErrors": {
     "required": "هذا الحقل مطلوب",
-    "email": "الرجاء إدخال بريد إلكتروني صحيح"
+    "email": "الرجاء إدخال عنوان بريد إلكتروني صالح",
+    "minlength": "لقد أدخلت {{actualLength}}, ولكن الحد الأدنى هو {{requiredLength}}",
+    "maxlength": "الطول يجب أن يكون اقل من {{requiredLength}} حروف، وقد دخل {{actualLength}} حروف"
   }
 }
 ```
 
------
+---
 
 ## ⚙️ Advanced Customization
 
@@ -136,10 +138,7 @@ Create JSON translation files in the path you configured above (e.g., `public/i1
 Add the `withoutValidationErrors` attribute to any form control element to prevent the directive from handling its errors.
 
 ```html
-<input
-  formControlName="username"
-  withoutValidationErrors
-/>
+<input formControlName="username" withoutValidationErrors />
 ```
 
 ### Changing Error Message Position
@@ -155,17 +154,11 @@ By default, error messages are rendered right after the form control element. To
 <form [formGroup]="form">
   <div class="input-group">
     <label>Email Address</label>
-    <input
-      formControlName="email"
-      [container]="errorContainer.container"
-    />
+    <input formControlName="email" [container]="errorContainer.container" />
   </div>
 </form>
 
-<ng-container
-  validatorMessageContainer
-  #errorContainer="validatorMessageContainer"
-/>
+<ng-container validatorMessageContainer #errorContainer="validatorMessageContainer" />
 ```
 
 ### Customizing When Errors Are Displayed
@@ -176,16 +169,13 @@ You can define your own logic for when errors become visible by providing a cust
 
     ```typescript
     // src/app/custom-error-state-matcher.ts
-    import { Injectable } from '@angular/core';
-    import { AbstractControl, FormGroupDirective, NgForm } from '@angular/forms';
-    import { ErrorStateMatcher } from './dynamic-error/core/error-state-matcher';
+    import { Injectable } from "@angular/core";
+    import { AbstractControl, FormGroupDirective, NgForm } from "@angular/forms";
+    import { ErrorStateMatcher } from "./dynamic-error/core/error-state-matcher";
 
     @Injectable()
     export class CustomErrorStateMatcher implements ErrorStateMatcher {
-      isErrorVisible(
-        control: AbstractControl,
-        form: FormGroupDirective | NgForm | null
-      ): boolean {
+      isErrorVisible(control: AbstractControl, form: FormGroupDirective | NgForm | null): boolean {
         // Show errors only if the control is invalid AND
         // (the control is touched OR the form has been submitted)
         const isSubmitted = form && form.submitted;
@@ -198,21 +188,19 @@ You can define your own logic for when errors become visible by providing a cust
 
     ```typescript
     // your-component.ts
-    import { CustomErrorStateMatcher } from '../custom-error-state-matcher';
-    import { ErrorStateMatcher } from './dynamic-error/core/error-state-matcher';
+    import { CustomErrorStateMatcher } from "../custom-error-state-matcher";
+    import { ErrorStateMatcher } from "./dynamic-error/core/error-state-matcher";
 
     @Component({
       // ...
-      providers: [
-        { provide: ErrorStateMatcher, useClass: CustomErrorStateMatcher }
-      ]
+      providers: [{ provide: ErrorStateMatcher, useClass: CustomErrorStateMatcher }],
     })
     export class YourComponent {
       // ...
     }
     ```
 
------
+---
 
 ## 🧪 Demo Project
 
@@ -226,7 +214,7 @@ npm install
 npm start
 ```
 
------
+---
 
 ## 📜 License
 

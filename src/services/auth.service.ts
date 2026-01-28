@@ -45,7 +45,7 @@ export class AuthService {
       .pipe(
         tap(() => {
           this._user = null;
-        })
+        }),
       );
   }
 
@@ -57,14 +57,3 @@ export class AuthService {
       .pipe(tap((res) => (this._user = res ? res.data : null)));
   }
 }
-
-// auth with jwt in local storage
-// sent jwt token to front
-// front save jwt token in local storage
-// front send jwt token to back
-// front delete jwt token from local storage to logout
-
-// auth with jwt in cookie
-// back save jwt token in cookie
-// cookies sent to back with every request automatically
-// back is responsible for deleting jwt token from cookie
